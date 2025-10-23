@@ -5,6 +5,7 @@ dotenv.config({ path: path.join('./src/config/.env.dev') })
 import express from 'express'
 import authController from './modules/auth/auth.controller.js'
 import userController from "./modules/user/user.controller.js"
+import productController from "./modules/product/product.controller.js"
 import { connectDB } from './DB/connection.js'
 import { globalErrorHandling } from './utils/response/response.js'
 
@@ -37,6 +38,7 @@ const bootstrap = async () => {
 
     app.use("/auth", authController)
     app.use("/user", userController)
+    app.use("/product", productController)
 
     app.use("{/*dummy}", (req, res) => res.status(404).json({ message: "In-valid routing" }))
 
