@@ -16,7 +16,13 @@ export const login = {
 
 export const signup = {
     body: joi.object().keys({
-        fullname: joi.string().min(2).max(50).required(),
+        fullname: joi.string().custom((value, helpers) => {
+            const parts = value.trim().split(/\s+/);   //splits the string wherever there’s one or more spaces
+            if (parts.length !== 2) {
+                return helpers.message("Fullname must include first and last name (ex. Ahmed Mohamed).");
+            }
+            return value;
+        }).min(2).max(50).required(),
         email: joi.string().email({ minDomainSegments: 2, maxDomainSegments: 3, tlds: { allow: ['net', 'com'] } }).required(),
         phone: joi.string().pattern(egyptPhoneRegex).required().messages({
             "string.pattern.base": "Phone number must be a valid Egyptian number.",

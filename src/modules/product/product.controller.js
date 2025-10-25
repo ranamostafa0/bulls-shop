@@ -19,6 +19,10 @@ router.post("/", authentication, authorization({ accessRoles: roleEnum.admin }),
     productService.createProduct
 );
 
+router.get("/", validation(validators.getAllProducts), productService.getAllProducts)
+router.get("/:id", validation(validators.getSpecificProduct), productService.getSpecificProduct);
+
+
 export default router
 
 

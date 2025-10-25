@@ -4,8 +4,8 @@ export const create = async ({ model, data = {} } = {}) => {
 }
 
 //Finders
-export const findAll = async ({ model, filter = {}, select = "", populate = [], skip = 0, limit = 1000 } = {}) => {
-    return await model.find(filter).select(select).populate(populate).skip(skip).limit(limit);
+export const findAll = async ({ model, filter = {}, select = "", populate = [], sort = {}, skip = 0, limit = 1000 } = {}) => {
+    return await model.find(filter).select(select).populate(populate).sort(sort).skip(skip).limit(limit);
 }
 
 export const findOne = async ({ model, filter = {}, select = "", populate = [] } = {}) => {
